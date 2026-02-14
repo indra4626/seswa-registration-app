@@ -60,15 +60,43 @@ export default function Dashboard() {
         <>
             <header className="topbar">
                 <h1>seswa.in</h1>
-                <button id="logoutBtn" onClick={handleLogout} style={{
-                    background: 'rgba(255,255,255,0.2)',
-                    border: '1px solid rgba(255,255,255,0.4)',
-                    color: 'white',
-                    padding: '8px 16px',
-                    borderRadius: '6px',
-                    cursor: 'pointer',
-                    fontWeight: 600
-                }}>Logout</button>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                    <button onClick={async () => {
+                        if (confirm('WARNING: This will PERMANENTLY DELETE ALL participant data. Are you sure?')) {
+                            try {
+                                const res = await fetch('/api/admin/clear-data', { method: 'DELETE' });
+                                if (res.ok) {
+                                    alert('All data cleared successfully');
+                                    window.location.reload();
+                                } else {
+                                    alert('Failed to clear data');
+                                }
+                            } catch (e) {
+                                console.error(e);
+                                alert('Error clearing data');
+                            }
+                        }
+                    }} style={{
+                        background: '#dc3545',
+                        border: '1px solid rgba(255,255,255,0.4)',
+                        color: 'white',
+                        padding: '8px 16px',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        fontWeight: 600
+                    }}>
+                        Reset Data
+                    </button>
+                    <button id="logoutBtn" onClick={handleLogout} style={{
+                        background: 'rgba(255,255,255,0.2)',
+                        border: '1px solid rgba(255,255,255,0.4)',
+                        color: 'white',
+                        padding: '8px 16px',
+                        borderRadius: '6px',
+                        cursor: 'pointer',
+                        fontWeight: 600
+                    }}>Logout</button>
+                </div>
             </header>
 
             <main className="container" style={{ paddingTop: '80px', paddingBottom: '40px' }}>
