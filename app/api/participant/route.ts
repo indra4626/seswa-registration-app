@@ -50,7 +50,11 @@ export async function POST(request: Request) {
         return NextResponse.json({ success: true, data: participant }, { status: 201 });
     } catch (error: any) {
         console.error("Database Error:", error);
-        return NextResponse.json({ success: false, error: "Registration Failed" }, { status: 500 });
+        return NextResponse.json({
+            success: false,
+            error: error instanceof Error ? error.message : "Registration Failed",
+            details: error
+        }, { status: 500 });
     }
 }
 

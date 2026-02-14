@@ -87,8 +87,9 @@ export default function Student() {
                     showQRResult(payload);
                 }
             } else {
-                alert('Failed to save registration. Please try again.');
-                console.error(data.error);
+                const errorMessage = data.details?.message || data.error || 'Failed to save registration. Please try again.';
+                alert(`Error: ${errorMessage}`);
+                console.error("Full error:", data);
             }
         } catch (error) {
             console.error('Error saving participant:', error);
