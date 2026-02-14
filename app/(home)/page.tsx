@@ -71,11 +71,11 @@ export default function Home() {
           <h3 className="modal-subtitle">📬 Get in Touch</h3>
           <div className="contact-item">
             <span className="contact-label">Email Support</span>
-            <a href="mailto:hembramindra8@gmail.com" className="contact-link">hembramindra8@gmail.com</a>
+            <a href="mailto:support@seswa.in" className="contact-link">support@seswa.in</a>
           </div>
           <div className="contact-item">
             <span className="contact-label">Mobile Support</span>
-            <a href="tel:+919382091267" className="contact-link">+91 9382091267</a>
+            <span className="contact-link">Contact Event Admin</span>
           </div>
           <div className="contact-item">
             <span className="contact-label">Response Time</span>
@@ -154,7 +154,7 @@ export default function Home() {
 
         <div className="modal-section">
           <h3>9. Contact</h3>
-          <p>For questions about this Privacy Policy, contact us at <a href="mailto:hembramindra8@gmail.com" className="contact-link">hembramindra8@gmail.com</a> or call <a href="tel:+919382091267" className="contact-link">+91 9382091267</a>.</p>
+          <p>For questions about this Privacy Policy, please contact your event administrator or email us at <a href="mailto:support@seswa.in" className="contact-link">support@seswa.in</a>.</p>
         </div>
       </div>
     ));
@@ -217,7 +217,7 @@ export default function Home() {
 
         <div className="modal-section">
           <h3>9. Contact</h3>
-          <p>For questions about these Terms, contact us at <a href="mailto:hembramindra8@gmail.com" className="contact-link">hembramindra8@gmail.com</a> or call <a href="tel:+919382091267" className="contact-link">+91 9382091267</a>.</p>
+          <p>For questions about these Terms, please contact your event administrator or email us at <a href="mailto:support@seswa.in" className="contact-link">support@seswa.in</a>.</p>
         </div>
       </div>
     ));
