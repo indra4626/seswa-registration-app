@@ -21,6 +21,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "SESWA - Digital Registration System",
   description: "Digital Registration and Attendance Management Platform",
+  icons: {
+    icon: '/assets/seswa.png',
+    shortcut: '/assets/seswa.png',
+    apple: '/assets/seswa.png',
+  }
 };
 
 export default function RootLayout({
