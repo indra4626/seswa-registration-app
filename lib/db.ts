@@ -20,9 +20,13 @@ if (!cached) {
 }
 
 async function dbConnect() {
+    // Clear cache if connection failed previously
     if (cached.conn) {
         return cached.conn;
     }
+
+    // Always clear the cached promise to ensure we use fresh connection with current env vars
+    cached.promise = null;
 
     if (!cached.promise) {
         const opts = {
@@ -36,10 +40,12 @@ async function dbConnect() {
 
     try {
         console.log("Connecting to MongoDB...");
+        console.log("Using URI:", MONGODB_URI!.substring(0, 50) + "...");
         cached.conn = await cached.promise;
         console.log("MongoDB Connected Successfully");
     } catch (e) {
         cached.promise = null;
+        cached.conn = null; // Also clear the connection
         console.error("MongoDB Connection Error:", e);
         throw e;
     }
