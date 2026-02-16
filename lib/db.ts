@@ -20,18 +20,27 @@ if (!cached) {
 }
 
 async function dbConnect() {
-    // Clear cache if connection failed previously
-    if (cached.conn) {
+    // Check if we have a valid existing connection
+    if (cached.conn && mongoose.connection.readyState === 1) {
+        console.log("Using existing MongoDB connection");
         return cached.conn;
     }
 
-    // Always clear the cached promise to ensure we use fresh connection with current env vars
-    cached.promise = null;
+    // Clear stale connection if it exists but is not connected
+    if (cached.conn && mongoose.connection.readyState !== 1) {
+        console.log("Clearing stale connection");
+        cached.conn = null;
+        cached.promise = null;
+    }
 
+    // Create new connection promise if needed
     if (!cached.promise) {
         const opts = {
             bufferCommands: false,
         };
+
+        console.log("Creating new MongoDB connection...");
+        console.log("Using URI:", MONGODB_URI!.substring(0, 50) + "...");
 
         cached.promise = mongoose.connect(MONGODB_URI!, opts).then((mongoose) => {
             return mongoose;
@@ -39,13 +48,12 @@ async function dbConnect() {
     }
 
     try {
-        console.log("Connecting to MongoDB...");
-        console.log("Using URI:", MONGODB_URI!.substring(0, 50) + "...");
         cached.conn = await cached.promise;
         console.log("MongoDB Connected Successfully");
     } catch (e) {
+        // Clear both promise and connection on error
         cached.promise = null;
-        cached.conn = null; // Also clear the connection
+        cached.conn = null;
         console.error("MongoDB Connection Error:", e);
         throw e;
     }
